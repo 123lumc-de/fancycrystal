@@ -1,6 +1,7 @@
 package de.lmcstudios.fancycrystal.commands;
 
 import de.lmcstudios.fancycrystal.FancyCrystalPlugin;
+import de.lmcstudios.fancycrystal.util.NumberFormatter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -63,7 +64,7 @@ public class CrystalsPayCommand implements CommandExecutor {
         plugin.getEconomy().depositPlayer(target, amount);
 
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
-        String amt = String.format("%.2f", amount);
+        String amt = NumberFormatter.formatNumber(amount);
 
         player.sendMessage(MM.deserialize(prefix +
             plugin.getConfig().getString("messages.pay-success", "")
