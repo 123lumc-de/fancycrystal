@@ -1,0 +1,94 @@
+# ============================================
+# FancyCrystal - Konfiguration
+# LMC Studios
+# ============================================
+
+currency:
+  name: "Crystal"
+  name-plural: "Crystals"
+  symbol: "✦"
+  decimals: 2
+  starting-balance: 0.0
+  max-balance: 1000000000.0
+
+messages:
+  prefix: "<gradient:#00E5FF:#7B68EE>[Crystals]</gradient> "
+  balance: "<gray>Du hast <aqua>%amount% %symbol%</aqua> <gray>Crystals."
+  balance-other: "<gray>%player% hat <aqua>%amount% %symbol%</aqua> <gray>Crystals."
+  pay-success: "<green>Du hast <aqua>%amount% %symbol%</aqua> <green>an <yellow>%target%</yellow> <green>gesendet."
+  pay-received: "<green>Du hast <aqua>%amount% %symbol%</aqua> <green>von <yellow>%sender%</yellow> <green>erhalten."
+  pay-insufficient: "<red>Du hast nicht genug Crystals."
+  pay-self: "<red>Du kannst dir nicht selbst Crystals senden."
+  player-not-found: "<red>Spieler nicht gefunden."
+  invalid-amount: "<red>Ungültiger Betrag."
+  no-permission: "<red>Keine Berechtigung."
+  balance-set: "<green>Kontostand von <yellow>%player%</yellow> auf <aqua>%amount%</aqua> gesetzt."
+  balance-added: "<green>%amount%</green> <gray>Crystals zu <yellow>%player%</yellow> hinzugefügt."
+  balance-removed: "<green>%amount%</green> <gray>Crystals von <yellow>%player%</yellow> entfernt."
+
+shop:
+  title: "<gradient:#00E5FF:#7B68EE>Crystal Shop</gradient>"
+  rows: 6
+  filler:
+    material: GRAY_STAINED_GLASS_PANE
+    name: " "
+
+  item-format:
+    name: "<aqua>%name%"
+    lore:
+      - "<gray>Preis: <aqua>%price% %symbol%</aqua>"
+      - "<gray>Klicke zum Kaufen!"
+    lore-cant-afford:
+      - "<gray>Preis: <red>%price% %symbol%</red>"
+      - "<red>Nicht genug Crystals!"
+
+  items:
+    diamond:
+      slot: 10
+      material: DIAMOND
+      amount: 1
+      price: 100.0
+      display-name: "<aqua>Diamant"
+      lore:
+        - "<gray>Ein seltener Diamant."
+      commands: []
+
+    golden_apple:
+      slot: 11
+      material: GOLDEN_APPLE
+      amount: 1
+      price: 50.0
+      display-name: "<gold>Goldener Apfel"
+      lore:
+        - "<gray>Heilt und gibt Regeneration."
+      commands: []
+
+    netherite_scrap:
+      slot: 12
+      material: NETHERITE_SCRAP
+      amount: 1
+      price: 250.0
+      display-name: "<dark_purple>Netherite Schrott"
+      commands: []
+
+    spawner_command:
+      slot: 14
+      material: SPAWNER
+      amount: 1
+      price: 5000.0
+      display-name: "<red>Spawner"
+      lore:
+        - "<gray>Ein Spawner deiner Wahl."
+      commands:
+        - "spawner give %player%"
+
+    fly_1h:
+      slot: 15
+      material: FEATHER
+      amount: 1
+      price: 1000.0
+      display-name: "<yellow>Fly für 1 Stunde"
+      lore:
+        - "<gray>Erlaubt Fliegen für 60 Minuten."
+      commands:
+        - "fly %player% 60m"
