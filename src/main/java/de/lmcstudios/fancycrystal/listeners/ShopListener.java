@@ -4,6 +4,7 @@ import de.lmcstudios.fancycrystal.FancyCrystalPlugin;
 import de.lmcstudios.fancycrystal.shop.ShopGUI;
 import de.lmcstudios.fancycrystal.shop.ShopHolder;
 import de.lmcstudios.fancycrystal.shop.ShopItem;
+import de.lmcstudios.fancycrystal.util.NumberFormatter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -43,7 +44,7 @@ public class ShopListener implements Listener {
         player.sendMessage(MM.deserialize(
             plugin.getConfig().getString("messages.prefix", "") +
             "<green>Du hast <aqua>" + item.getId() + "</aqua> für <aqua>" +
-            String.format("%.2f", item.getPrice()) + "</aqua> gekauft!"));
+            NumberFormatter.formatNumber(item.getPrice()) + "</aqua> gekauft!"));
 
         if (item.getCommands() == null || item.getCommands().isEmpty()) {
             player.getInventory().addItem(new ItemStack(item.getMaterial(), item.getAmount()));
