@@ -1,6 +1,7 @@
 package de.lmcstudios.fancycrystal.commands;
 
 import de.lmcstudios.fancycrystal.FancyCrystalPlugin;
+import de.lmcstudios.fancycrystal.util.NumberFormatter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -57,7 +58,7 @@ public class SetCrystalsCommand implements CommandExecutor {
 
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
         String msg = plugin.getConfig().getString("messages.balance-set", "")
-            .replace("%amount%", String.format("%.2f", amount))
+            .replace("%amount%", NumberFormatter.formatNumber(amount))
             .replace("%symbol%", symbol)
             .replace("%player%", target.getName() != null ? target.getName() : args[0]);
 
