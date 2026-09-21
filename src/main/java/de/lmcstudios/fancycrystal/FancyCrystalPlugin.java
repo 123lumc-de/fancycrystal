@@ -3,6 +3,7 @@ package de.lmcstudios.fancycrystal;
 import de.lmcstudios.fancycrystal.commands.*;
 import de.lmcstudios.fancycrystal.economy.CrystalEconomy;
 import de.lmcstudios.fancycrystal.economy.CrystalStorage;
+import de.lmcstudios.fancycrystal.hooks.PlaceholderHook;
 import de.lmcstudios.fancycrystal.listeners.ShopListener;
 import de.lmcstudios.fancycrystal.shop.ShopConfig;
 import net.milkbowl.vault.economy.Economy;
@@ -56,7 +57,15 @@ public class FancyCrystalPlugin extends JavaPlugin {
 
         setupBStats();
 
-        getLogger().info("FancyCrystal v" + getDescription().getVersion() + " von LMC Studios aktiviert!");
+        // PlaceholderAPI-Hook
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PlaceholderHook(this).register();
+            getLogger().info("PlaceholderAPI-Hook registriert!");
+        } else {
+            getLogger().info("PlaceholderAPI nicht gefunden - Placeholder deaktiviert.");
+        }
+
+        getLogger().info("FancyCrystal v" + getPluginMeta().getVersion() + " von LMC Studios aktiviert!");
     }
 
     private void setupBStats() {
