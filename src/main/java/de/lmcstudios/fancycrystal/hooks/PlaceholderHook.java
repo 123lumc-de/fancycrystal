@@ -31,7 +31,7 @@ public class PlaceholderHook extends PlaceholderExpansion {
 
     @Override
     public boolean persist() {
-        return true; // Reload-sicher
+        return true;
     }
 
     @Override
@@ -41,37 +41,21 @@ public class PlaceholderHook extends PlaceholderExpansion {
         double balance = plugin.getStorage().getBalance(player.getUniqueId());
 
         return switch (params.toLowerCase()) {
-            // Rohwerte ohne Formatierung
-            case "balance"             -> String.valueOf(balance);
-
-            // Formatiert mit Symbol (z.B. "1.5K ✦")
+            case "balance"                -> String.valueOf(balance);
             case "balance_formatted",
-                 "formatted"           -> NumberFormatter.formatWithSymbol(balance);
-
-            // Nur die Zahl, ohne Symbol (z.B. "1.5K")
+                 "formatted"              -> NumberFormatter.formatWithSymbol(balance);
             case "balance_short",
-                 "short"               -> NumberFormatter.shortFormat(balance);
-
-            // Volle Zahl mit Trennzeichen (z.B. "1.500,00")
+                 "short"                  -> NumberFormatter.shortFormat(balance);
             case "balance_full",
-                 "full"                -> NumberFormatter.fullFormat(balance);
-
-            // Nur das Symbol (z.B. "✦")
-            case "symbol"              -> plugin.getConfig().getString("currency.symbol", "✦");
-
-            // Name der Währung im Singular/Plural
+                 "full"                   -> NumberFormatter.fullFormat(balance);
+            case "symbol"                 -> plugin.getConfig().getString("currency.symbol", "✦");
             case "currency",
-                 "currency_name"       -> plugin.getConfig().getString("currency.name", "Crystal");
+                 "currency_name"          -> plugin.getConfig().getString("currency.name", "Crystal");
             case "currency_plural",
-                 "currency_name_plural"-> plugin.getConfig().getString("currency.name-plural", "Crystals");
-
-            // Kürzel ohne Zahl, z.B. "K"/"M"/"B"/"T" – nützlich für eigene Layouts
-            case "unit"                -> unitFor(balance);
-
-            // Platzhalter für die aktuellen Shop-Anzahl
-            case "shop_items"          -> String.valueOf(plugin.getShopConfig().getAllItems().size());
-
-            default -> null; // unbekannter Platzhalter
+                 "currency_name_plural"   -> plugin.getConfig().getString("currency.name-plural", "Crystals");
+            case "unit"                   -> unitFor(balance);
+            case "shop_items"             -> String.valueOf(plugin.getShopConfig().getAllItems().size());
+            default -> null;
         };
     }
 
