@@ -6,6 +6,7 @@ authors: [LMC Studios]
 description: Custom Crystal currency for Vault with a configurable shop
 website: https://github.com/LMC-Studios/FancyCrystal
 depend: [Vault]
+softdepend: [PlaceholderAPI]
 
 commands:
   crystals:
