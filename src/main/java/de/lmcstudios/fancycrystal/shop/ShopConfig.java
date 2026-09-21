@@ -49,15 +49,7 @@ public class ShopConfig {
         }
     }
 
-    public ShopItem getItemAtSlot(int slot) {
-        return itemsBySlot.get(slot);
-    }
-
-    public List<ShopItem> getAllItems() {
-        return new ArrayList<>(itemsBySlot.values());
-    }
-
-    public int getRows() {
-        return plugin.getConfig().getInt("shop.rows", 6);
-    }
+    public ShopItem getItemAtSlot(int slot) { return itemsBySlot.get(slot); }
+    public List<ShopItem> getAllItems() { return new ArrayList<>(itemsBySlot.values()); }
+    public int getRows() { return plugin.getConfig().getInt("shop.rows", 6); }
 }
