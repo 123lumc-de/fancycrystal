@@ -39,24 +39,3 @@ Voraussetzungen
 
    
 ---
-
-## ✅ Zusammenfassung
-
-| Datei | Zweck |
-|---|---|
-| `pom.xml` | Maven-Build mit Paper, Vault, bStats + Shade |
-| `plugin.yml` | Commands, Permissions, Main-Class |
-| `config.yml` | Alle Nachrichten + Shop-Items einstellbar |
-| `FancyCrystalPlugin.java` | Hauptklasse, Vault-Registrierung, bStats |
-| `CrystalStorage.java` | YAML-Persistenz + Stats für bStats |
-| `CrystalEconomy.java` | Vault-`Economy`-Implementierung |
-| `ShopItem.java` | Datenmodell für ein Shop-Item |
-| `ShopConfig.java` | Liest Shop-Items aus `config.yml` |
-| `ShopHolder.java` | Marker fürs GUI |
-| `ShopGUI.java` | Baut das Inventar |
-| `ShopListener.java` | Klick-Handling |
-| 6 Command-Klassen | Alle `/crystals*`, `/setcrystals`, `/addcrystals`, `/removecrystals` |
-| `build.yml` | GitHub Actions Workflow |
-| `README.md` | Repo-Beschreibung |
-
-**Nächster Schritt**: Repo `LMC-Studios/FancyCrystal` auf GitHub anlegen, alle Dateien pushen, Action läuft automatisch. Wenn du willst, baue ich dir noch **Tab-Completer**, **SQLite-Support** oder **Mehrsprachigkeit** dazu. Sag einfach Bescheid! 💎 
