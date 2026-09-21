@@ -10,10 +10,6 @@ public final class NumberFormatter {
 
     private NumberFormatter() {}
 
-    /**
-     * Formatiert eine Zahl kompakt mit K (Tausend), M (Million), B (Billion), T (Trillion).
-     * Beispiel: 1500 -> "1.5K", 2500000 -> "2.5M", 1200000000 -> "1.2B"
-     */
     public static String shortFormat(double value) {
         boolean negative = value < 0;
         double abs = Math.abs(value);
@@ -21,48 +17,37 @@ public final class NumberFormatter {
         String suffix;
         double divisor;
 
-        if (abs >= 1_000_000_000_000L) {       // Trillion
+        if (abs >= 1_000_000_000_000L) {
             suffix = "T";
             divisor = 1_000_000_000_000D;
-        } else if (abs >= 1_000_000_000D) {    // Billion
+        } else if (abs >= 1_000_000_000D) {
             suffix = "B";
             divisor = 1_000_000_000D;
-        } else if (abs >= 1_000_000D) {        // Million
+        } else if (abs >= 1_000_000D) {
             suffix = "M";
             divisor = 1_000_000D;
-        } else if (abs >= 1_000D) {            // Thousand
+        } else if (abs >= 1_000D) {
             suffix = "K";
             divisor = 1_000D;
         } else {
-            // Unter 1000 -> normale Zahl mit decimals
             DecimalFormat df = buildFormat(decimals());
             return df.format(value);
         }
 
         double result = abs / divisor;
-        DecimalFormat df = buildFormat(1); // 1 Nachkommastelle bei K/M/B/T
+        DecimalFormat df = buildFormat(1);
         String formatted = df.format(result);
-        // ".0" am Ende wegschneiden (z.B. 2.0K -> 2K)
-        if (formatted.endsWith(".0")) {
+        if (formatted.endsWith(",0")) {
             formatted = formatted.substring(0, formatted.length() - 2);
         }
         return (negative ? "-" : "") + formatted + suffix;
     }
 
-    /**
-     * Formatiert eine Zahl mit Tausendertrennzeichen und der in der Config definierten Nachkommastellen-Anzahl.
-     * Beispiel: 1234567.89 -> "1.234.567,89" (bei Locale DE)
-     */
     public static String fullFormat(double value) {
         DecimalFormat df = buildFormat(decimals());
         return df.format(value);
     }
 
-    /**
-     * Formatiert Zahl + Währungssymbol, abhängig von der Config-Einstellung `currency.short-format`.
-     * Wenn short-format aktiv ist -> "1.5K ✦"
-     * Sonst -> "1.500,00 ✦"
-     */
     public static String formatWithSymbol(double value) {
         FancyCrystalPlugin plugin = FancyCrystalPlugin.getInstance();
         boolean shortFmt = plugin.getConfig().getBoolean("currency.short-format", true);
@@ -71,9 +56,6 @@ public final class NumberFormatter {
         return num + " " + symbol;
     }
 
-    /**
-     * Nur die Zahl, ohne Symbol – respektiert ebenfalls short-format.
-     */
     public static String formatNumber(double value) {
         FancyCrystalPlugin plugin = FancyCrystalPlugin.getInstance();
         boolean shortFmt = plugin.getConfig().getBoolean("currency.short-format", true);
