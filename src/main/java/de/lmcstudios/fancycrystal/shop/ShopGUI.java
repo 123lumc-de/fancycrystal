@@ -1,6 +1,7 @@
 package de.lmcstudios.fancycrystal.shop;
 
 import de.lmcstudios.fancycrystal.FancyCrystalPlugin;
+import de.lmcstudios.fancycrystal.util.NumberFormatter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -73,7 +74,7 @@ public class ShopGUI {
 
         List<Component> lore = new ArrayList<>();
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
-        String price = String.format("%.2f", item.getPrice());
+        String price = NumberFormatter.formatNumber(item.getPrice());
 
         for (String line : loreTemplate) {
             line = line.replace("%price%", price)
