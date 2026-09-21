@@ -36,6 +36,3 @@ Voraussetzungen
     Paper 1.21+ (Java 25)
 
     Vault
-
-   
----
