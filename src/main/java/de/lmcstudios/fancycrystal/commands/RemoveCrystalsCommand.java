@@ -1,6 +1,7 @@
 package de.lmcstudios.fancycrystal.commands;
 
 import de.lmcstudios.fancycrystal.FancyCrystalPlugin;
+import de.lmcstudios.fancycrystal.util.NumberFormatter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -55,7 +56,7 @@ public class RemoveCrystalsCommand implements CommandExecutor {
 
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
         String msg = plugin.getConfig().getString("messages.balance-removed", "")
-            .replace("%amount%", String.format("%.2f", toRemove))
+            .replace("%amount%", NumberFormatter.formatNumber(toRemove))
             .replace("%symbol%", symbol)
             .replace("%player%", target.getName() != null ? target.getName() : args[0]);
 
