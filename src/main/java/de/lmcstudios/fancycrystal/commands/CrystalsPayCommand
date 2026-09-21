@@ -1,0 +1,29 @@
+package de.lmcstudios.fancycrystal.commands;
+
+import de.lmcstudios.fancycrystal.FancyCrystalPlugin;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+public class CrystalsPayCommand implements CommandExecutor {
+
+    private final FancyCrystalPlugin plugin;
+    private static final MiniMessage MM = MiniMessage.miniMessage();
+
+    public CrystalsPayCommand(FancyCrystalPlugin plugin) { this.plugin = plugin; }
+
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
+                             @NotNull String label, @NotNull String[] args) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage("Nur für Spieler.");
+            return true;
+        }
+
+        String prefix = plugin.getConfig().getString("messages.prefix", "");
+
+        if (args
