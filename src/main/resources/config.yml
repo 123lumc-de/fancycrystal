@@ -8,6 +8,7 @@ currency:
   name-plural: "Crystals"
   symbol: "✦"
   decimals: 2
+  short-format: true     # true = 1.5K / 2.3M / 1.2B / 5T | false = 1.500,00
   starting-balance: 0.0
   max-balance: 1000000000.0
 
