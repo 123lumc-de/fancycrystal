@@ -115,6 +115,9 @@ public class CrystalEconomy implements Economy {
     @Override
     public boolean createPlayerAccount(OfflinePlayer player, String world) { return true; }
 
+    @Override
+    public boolean createPlayerAccount(String playerName, String worldName) { return true; }
+
     private EconomyResponse notSupported() {
         return new EconomyResponse(0, 0, EconomyResponse.ResponseType.NOT_IMPLEMENTED, "Banken nicht unterstützt");
     }
