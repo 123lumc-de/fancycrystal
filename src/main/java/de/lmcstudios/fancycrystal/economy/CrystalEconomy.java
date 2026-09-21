@@ -56,6 +56,12 @@ public class CrystalEconomy implements Economy {
     public boolean hasAccount(OfflinePlayer player, String worldName) { return true; }
 
     @Override
+    public boolean hasAccount(String playerName) { return true; }
+
+    @Override
+    public boolean hasAccount(String playerName, String worldName) { return true; }
+
+    @Override
     public double getBalance(OfflinePlayer player) {
         return storage.getBalance(player.getUniqueId());
     }
@@ -66,6 +72,17 @@ public class CrystalEconomy implements Economy {
     }
 
     @Override
+    public double getBalance(String playerName) {
+        OfflinePlayer player = plugin.getServer().getOfflinePlayer(playerName);
+        return storage.getBalance(player.getUniqueId());
+    }
+
+    @Override
+    public double getBalance(String playerName, String world) {
+        return getBalance(playerName);
+    }
+
+    @Override
     public boolean has(OfflinePlayer player, double amount) {
         return getBalance(player) >= amount;
     }
@@ -73,6 +90,16 @@ public class CrystalEconomy implements Economy {
     @Override
     public boolean has(OfflinePlayer player, String world, double amount) {
         return has(player, amount);
+    }
+
+    @Override
+    public boolean has(String playerName, double amount) {
+        return getBalance(playerName) >= amount;
+    }
+
+    @Override
+    public boolean has(String playerName, String world, double amount) {
+        return has(playerName, amount);
     }
 
     @Override
@@ -94,6 +121,17 @@ public class CrystalEconomy implements Economy {
     }
 
     @Override
+    public EconomyResponse withdrawPlayer(String playerName, double amount) {
+        OfflinePlayer player = plugin.getServer().getOfflinePlayer(playerName);
+        return withdrawPlayer(player, amount);
+    }
+
+    @Override
+    public EconomyResponse withdrawPlayer(String playerName, String world, double amount) {
+        return withdrawPlayer(playerName, amount);
+    }
+
+    @Override
     public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
         if (amount < 0)
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Betrag negativ");
@@ -110,10 +148,24 @@ public class CrystalEconomy implements Economy {
     }
 
     @Override
+    public EconomyResponse depositPlayer(String playerName, double amount) {
+        OfflinePlayer player = plugin.getServer().getOfflinePlayer(playerName);
+        return depositPlayer(player, amount);
+    }
+
+    @Override
+    public EconomyResponse depositPlayer(String playerName, String world, double amount) {
+        return depositPlayer(playerName, amount);
+    }
+
+    @Override
     public boolean createPlayerAccount(OfflinePlayer player) { return true; }
 
     @Override
     public boolean createPlayerAccount(OfflinePlayer player, String world) { return true; }
+
+    @Override
+    public boolean createPlayerAccount(String playerName) { return true; }
 
     @Override
     public boolean createPlayerAccount(String playerName, String worldName) { return true; }
@@ -123,12 +175,15 @@ public class CrystalEconomy implements Economy {
     }
 
     @Override public EconomyResponse createBank(String name, OfflinePlayer player) { return notSupported(); }
+    @Override public EconomyResponse createBank(String name, String world) { return notSupported(); }
     @Override public EconomyResponse deleteBank(String name) { return notSupported(); }
     @Override public EconomyResponse bankBalance(String name) { return notSupported(); }
     @Override public EconomyResponse bankHas(String name, double amount) { return notSupported(); }
     @Override public EconomyResponse bankWithdraw(String name, double amount) { return notSupported(); }
     @Override public EconomyResponse bankDeposit(String name, double amount) { return notSupported(); }
     @Override public EconomyResponse isBankOwner(String name, OfflinePlayer player) { return notSupported(); }
+    @Override public EconomyResponse isBankOwner(String name, String playerName) { return notSupported(); }
     @Override public EconomyResponse isBankMember(String name, OfflinePlayer player) { return notSupported(); }
+    @Override public EconomyResponse isBankMember(String name, String playerName) { return notSupported(); }
     @Override public List<String> getBanks() { return Collections.emptyList(); }
 }
