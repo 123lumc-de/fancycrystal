@@ -6,29 +6,29 @@
 currency:
   name: "Crystal"
   name-plural: "Crystals"
-  symbol: "✦"
+  symbol: ""             # leer = kein Symbol wird angezeigt
   decimals: 2
-  short-format: true     # true = 1.5K / 2.3M / 1.2B / 5T | false = 1.500,00
+  short-format: true     # true = 1,5K / 2,3M / 1,2B / 5T | false = 1.500,00
   starting-balance: 0.0
   max-balance: 1000000000.0
 
 messages:
   prefix: "<gradient:#00E5FF:#7B68EE>[Crystals]</gradient> "
-  balance: "<gray>Du hast <aqua>%amount% %symbol%</aqua> <gray>Crystals."
-  balance-other: "<gray>%player% hat <aqua>%amount% %symbol%</aqua> <gray>Crystals."
-  pay-success: "<green>Du hast <aqua>%amount% %symbol%</aqua> <green>an <yellow>%target%</yellow> <green>gesendet."
-  pay-received: "<green>Du hast <aqua>%amount% %symbol%</aqua> <green>von <yellow>%sender%</yellow> <green>erhalten."
+  balance: "<gray>Du hast <color:#E31749>%amount%</color> <gray>Crystals."
+  balance-other: "<gray>%player% hat <color:#E31749>%amount%</color> <gray>Crystals."
+  pay-success: "<green>Du hast <color:#E31749>%amount%</color> <green>an <yellow>%target%</yellow> <green>gesendet."
+  pay-received: "<green>Du hast <color:#E31749>%amount%</color> <green>von <yellow>%sender%</yellow> <green>erhalten."
   pay-insufficient: "<red>Du hast nicht genug Crystals."
   pay-self: "<red>Du kannst dir nicht selbst Crystals senden."
   player-not-found: "<red>Spieler nicht gefunden."
   invalid-amount: "<red>Ungültiger Betrag."
   no-permission: "<red>Keine Berechtigung."
-  balance-set: "<green>Kontostand von <yellow>%player%</yellow> auf <aqua>%amount%</aqua> gesetzt."
-  balance-added: "<green>%amount%</green> <gray>Crystals zu <yellow>%player%</yellow> hinzugefügt."
-  balance-removed: "<green>%amount%</green> <gray>Crystals von <yellow>%player%</yellow> entfernt."
+  balance-set: "<green>Kontostand von <yellow>%player%</yellow> auf <color:#E31749>%amount%</color> gesetzt."
+  balance-added: "<color:#E31749>%amount%</color> <gray>Crystals zu <yellow>%player%</yellow> hinzugefügt."
+  balance-removed: "<color:#E31749>%amount%</color> <gray>Crystals von <yellow>%player%</yellow> entfernt."
 
 shop:
-  title: "<gradient:#00E5FF:#7B68EE>Crystal Shop</gradient>"
+  title: "<gradient:#E31749:#7B68EE>Crystal Shop</gradient>"
   rows: 6
   filler:
     material: GRAY_STAINED_GLASS_PANE
@@ -37,10 +37,10 @@ shop:
   item-format:
     name: "<aqua>%name%"
     lore:
-      - "<gray>Preis: <aqua>%price% %symbol%</aqua>"
+      - "<gray>Preis: <color:#E31749>%price%</color>"
       - "<gray>Klicke zum Kaufen!"
     lore-cant-afford:
-      - "<gray>Preis: <red>%price% %symbol%</red>"
+      - "<gray>Preis: <red>%price%</red>"
       - "<red>Nicht genug Crystals!"
 
   items:
