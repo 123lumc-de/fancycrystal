@@ -46,15 +46,19 @@ public class FancyCrystalPlugin extends JavaPlugin {
 
         this.shopConfig = new ShopConfig(this);
 
+        // Commands
         getCommand("crystals").setExecutor(new CrystalsCommand(this));
         getCommand("crystalshop").setExecutor(new CrystalShopCommand(this));
         getCommand("crystalspay").setExecutor(new CrystalsPayCommand(this));
         getCommand("setcrystals").setExecutor(new SetCrystalsCommand(this));
         getCommand("addcrystals").setExecutor(new AddCrystalsCommand(this));
         getCommand("removecrystals").setExecutor(new RemoveCrystalsCommand(this));
+        getCommand("fancycrystal").setExecutor(new FancyCrystalCommand(this));
 
+        // Listener
         Bukkit.getPluginManager().registerEvents(new ShopListener(this), this);
 
+        // bStats
         setupBStats();
 
         // PlaceholderAPI-Hook
@@ -84,6 +88,12 @@ public class FancyCrystalPlugin extends JavaPlugin {
             Bukkit.getPluginManager().getPlugin("Vault") != null ? "ja" : "nein"));
 
         metrics.addCustomChart(new SimplePie("storage_type", () -> "yaml"));
+
+        metrics.addCustomChart(new SimplePie("short_format", () ->
+            getConfig().getBoolean("currency.short-format", true) ? "ja" : "nein"));
+
+        metrics.addCustomChart(new SimplePie("placeholderapi", () ->
+            Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null ? "ja" : "nein"));
 
         metrics.addCustomChart(new SingleLineChart("total_crystals_in_circulation",
             () -> (int) storage.getTotalCirculation()));
