@@ -32,6 +32,11 @@ commands:
     description: Entfernt Crystals
     usage: /removecrystals <Spieler> <Betrag>
     permission: fancycrystal.admin
+  fancycrystal:
+    description: FancyCrystal Verwaltungsbefehl
+    usage: /fc <reload|info>
+    aliases: [fc]
+    permission: fancycrystal.admin
 
 permissions:
   fancycrystal.admin:
