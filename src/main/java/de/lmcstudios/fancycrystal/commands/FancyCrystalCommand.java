@@ -39,35 +39,21 @@ public class FancyCrystalCommand implements CommandExecutor {
 
                 long start = System.currentTimeMillis();
 
-                // 1. Config neu laden
                 plugin.reloadConfig();
-
-                // 2. Shop-Items neu einlesen
                 plugin.getShopConfig().load();
-
-                // 3. Balances aus Datei neu in den Cache laden
                 plugin.getStorage().load();
 
                 long time = System.currentTimeMillis() - start;
 
                 sender.sendMessage(MM.deserialize(prefix + "<green>FancyCrystal neu geladen! <gray>(" + time + "ms)"));
-
-                // Info an alle mit Admin-Permission (optional)
-                Bukkit.getOnlinePlayers().stream()
-                    .filter(p -> !p.equals(sender) && p.hasPermission("fancycrystal.admin"))
-                    .forEach(p -> p.sendMessage(MM.deserialize(prefix + "<gray>Plugin wurde von <yellow>" + sender.getName() + "</yellow> neu geladen.")));
-
                 plugin.getLogger().info("Reload durch " + sender.getName() + " abgeschlossen (" + time + "ms)");
             }
 
             case "info" -> {
                 sender.sendMessage(MM.deserialize(prefix + "<gray>Version: <aqua>" + plugin.getPluginMeta().getVersion()));
-                sender.sendMessage(MM.deserialize(prefix + "<gray>Vault: " + (Bukkit.getPluginManager().getPlugin("Vault") != null ? "<green>aktiv" : "<red>inaktiv")));
-                sender.sendMessage(MM.deserialize(prefix + "<gray>PlaceholderAPI: " + (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null ? "<green>aktiv" : "<red>inaktiv")));
                 sender.sendMessage(MM.deserialize(prefix + "<gray>Shop-Items: <aqua>" + plugin.getShopConfig().getAllItems().size()));
                 sender.sendMessage(MM.deserialize(prefix + "<gray>Konten: <aqua>" + plugin.getStorage().getAccountCount()));
                 sender.sendMessage(MM.deserialize(prefix + "<gray>Umlauf: <aqua>" + NumberFormatter.formatWithSymbol(plugin.getStorage().getTotalCirculation())));
-                sender.sendMessage(MM.deserialize(prefix + "<gray>Shop-Item Anzahl: <aqua>" + plugin.getShopConfig().getAllItems().size()));
             }
 
             default -> sender.sendMessage(MM.deserialize(prefix + "<red>Unbekannter Subcommand. Nutze <aqua>/fc <reload|info>"));
