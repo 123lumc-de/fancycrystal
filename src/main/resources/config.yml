@@ -54,41 +54,6 @@ shop:
         - "<gray>Ein seltener Diamant."
       commands: []
 
-      # ============================================
-# PlaceholderAPI - MiniMessage Formatierung
-# ============================================
-# Alle Werte hier unterstützen MiniMessage-Tags:
-#   <red>, <gradient:#ff0000:#00ff00>, <bold>, <hover:show_text:'...'>, <click:...>
-#
-# Verfügbare Platzhalter im Format-String:
-#   %amount%   -> formatierte Zahl (mit short-format aus currency.short-format)
-#   %raw%      -> rohe Zahl (ohne Formatierung)
-#   %symbol%   -> Währungssymbol
-#   %currency% -> Währungsname (Singular)
-#   %plural%   -> Währungsname (Plural)
-#   %unit%     -> Einheit (K/M/B/T oder leer)
-#   %player%   -> Spielername
-#
-# PlaceholderAPI-Placeholder:
-#   %fancycrystal_balance%             -> Rohe Zahl (z.B. 1500.0)
-#   %fancycrystal_balance_short%       -> Kurzformat (z.B. 1.5K)
-#   %fancycrystal_balance_full%        -> Voller Wert (z.B. 1.500,00)
-#   %fancycrystal_balance_formatted%   -> Zahl + Symbol (z.B. 1.5K ✦)
-#   %fancycrystal_balance_custom%      -> Aus placeholders.balance-format (MiniMessage)
-#   %fancycrystal_balance_custom2%     -> Aus placeholders.balance-format-2 (MiniMessage)
-#   %fancycrystal_symbol%              -> Nur das Symbol
-#   %fancycrystal_currency%            -> Währungsname
-#   %fancycrystal_currency_plural%     -> Währungsname Plural
-#   %fancycrystal_unit%                -> Einheit (K/M/B/T)
-#   %fancycrystal_shop_items%          -> Anzahl Shop-Items
-
-placeholders:
-  # Format für %fancycrystal_balance_custom%
-  balance-format: "<gray>[<gradient:#00E5FF:#7B68EE>%amount% %symbol%</gradient>]</gray>"
-
-  # Format für %fancycrystal_balance_custom2%
-  balance-format-2: "<gradient:#00E5FF:#7B68EE>%amount%</gradient> <gray>%symbol%</gray>"
-
     golden_apple:
       slot: 11
       material: GOLDEN_APPLE
@@ -128,3 +93,38 @@ placeholders:
         - "<gray>Erlaubt Fliegen für 60 Minuten."
       commands:
         - "fly %player% 60m"
+
+        # ============================================
+# PlaceholderAPI - MiniMessage Formatierung
+# ============================================
+# Alle Werte hier unterstützen MiniMessage-Tags:
+#   <red>, <gradient:#ff0000:#00ff00>, <bold>, <hover:show_text:'...'>, <click:...>
+#
+# Verfügbare Platzhalter im Format-String:
+#   %amount%   -> formatierte Zahl (mit short-format aus currency.short-format)
+#   %raw%      -> rohe Zahl (ohne Formatierung)
+#   %symbol%   -> Währungssymbol
+#   %currency% -> Währungsname (Singular)
+#   %plural%   -> Währungsname (Plural)
+#   %unit%     -> Einheit (K/M/B/T oder leer)
+#   %player%   -> Spielername
+#
+# PlaceholderAPI-Placeholder:
+#   %fancycrystal_balance%             -> Rohe Zahl (z.B. 1500.0)
+#   %fancycrystal_balance_short%       -> Kurzformat (z.B. 1.5K)
+#   %fancycrystal_balance_full%        -> Voller Wert (z.B. 1.500,00)
+#   %fancycrystal_balance_formatted%   -> Zahl + Symbol (z.B. 1.5K ✦)
+#   %fancycrystal_balance_custom%      -> Aus placeholders.balance-format (MiniMessage)
+#   %fancycrystal_balance_custom2%     -> Aus placeholders.balance-format-2 (MiniMessage)
+#   %fancycrystal_symbol%              -> Nur das Symbol
+#   %fancycrystal_currency%            -> Währungsname
+#   %fancycrystal_currency_plural%     -> Währungsname Plural
+#   %fancycrystal_unit%                -> Einheit (K/M/B/T)
+#   %fancycrystal_shop_items%          -> Anzahl Shop-Items
+
+placeholders:
+  # Format für %fancycrystal_balance_custom%
+  balance-format: "<gray>[<gradient:#00E5FF:#7B68EE>%amount% %symbol%</gradient>]</gray>"
+
+  # Format für %fancycrystal_balance_custom2%
+  balance-format-2: "<gradient:#00E5FF:#7B68EE>%amount%</gradient> <gray>%symbol%</gray>"
