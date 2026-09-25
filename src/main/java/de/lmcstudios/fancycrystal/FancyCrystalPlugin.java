@@ -1,17 +1,13 @@
 package de.lmcstudios.fancycrystal;
 
 import de.lmcstudios.fancycrystal.commands.*;
-import de.lmcstudios.fancycrystal.economy.CrystalEconomy;
 import de.lmcstudios.fancycrystal.economy.CrystalStorage;
-import de.lmcstudios.fancycrystal.hooks.PlaceholderHook;
 import de.lmcstudios.fancycrystal.listeners.ShopListener;
 import de.lmcstudios.fancycrystal.shop.ShopConfig;
-import net.milkbowl.vault.economy.Economy;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bstats.charts.SingleLineChart;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FancyCrystalPlugin extends JavaPlugin {
@@ -19,7 +15,6 @@ public class FancyCrystalPlugin extends JavaPlugin {
     private static final int BSTATS_PLUGIN_ID = 34195;
 
     private static FancyCrystalPlugin instance;
-    private CrystalEconomy economy;
     private CrystalStorage storage;
     private ShopConfig shopConfig;
 
@@ -32,17 +27,6 @@ public class FancyCrystalPlugin extends JavaPlugin {
 
         this.storage = new CrystalStorage(this);
         this.storage.load();
-
-        this.economy = new CrystalEconomy(this);
-
-        if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
-            Bukkit.getServicesManager().register(
-                Economy.class, economy, this, ServicePriority.Highest
-            );
-            getLogger().info("Vault-Economy 'Crystals' erfolgreich registriert!");
-        } else {
-            getLogger().warning("Vault nicht gefunden! Economy kann nicht registriert werden.");
-        }
 
         this.shopConfig = new ShopConfig(this);
 
@@ -61,14 +45,6 @@ public class FancyCrystalPlugin extends JavaPlugin {
         // bStats
         setupBStats();
 
-        // PlaceholderAPI-Hook
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new PlaceholderHook(this).register();
-            getLogger().info("PlaceholderAPI-Hook registriert!");
-        } else {
-            getLogger().info("PlaceholderAPI nicht gefunden - Placeholder deaktiviert.");
-        }
-
         getLogger().info("FancyCrystal v" + getPluginMeta().getVersion() + " von LMC Studios aktiviert!");
     }
 
@@ -84,16 +60,10 @@ public class FancyCrystalPlugin extends JavaPlugin {
             return "25+";
         }));
 
-        metrics.addCustomChart(new SimplePie("vault_enabled", () ->
-            Bukkit.getPluginManager().getPlugin("Vault") != null ? "ja" : "nein"));
-
         metrics.addCustomChart(new SimplePie("storage_type", () -> "yaml"));
 
         metrics.addCustomChart(new SimplePie("short_format", () ->
             getConfig().getBoolean("currency.short-format", true) ? "ja" : "nein"));
-
-        metrics.addCustomChart(new SimplePie("placeholderapi", () ->
-            Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null ? "ja" : "nein"));
 
         metrics.addCustomChart(new SingleLineChart("total_crystals_in_circulation",
             () -> (int) storage.getTotalCirculation()));
@@ -109,7 +79,6 @@ public class FancyCrystalPlugin extends JavaPlugin {
     }
 
     public static FancyCrystalPlugin getInstance() { return instance; }
-    public CrystalEconomy getEconomy() { return economy; }
     public CrystalStorage getStorage() { return storage; }
     public ShopConfig getShopConfig() { return shopConfig; }
 }
