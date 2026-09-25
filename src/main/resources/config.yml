@@ -6,18 +6,21 @@
 currency:
   name: "Crystal"
   name-plural: "Crystals"
-  symbol: ""             # leer = kein Symbol wird angezeigt
+  symbol: "✦"
   decimals: 2
-  short-format: true     # true = 1,5K / 2,3M / 1,2B / 5T | false = 1.500,00
+  short-format: true
   starting-balance: 0.0
   max-balance: 1000000000.0
 
+# Akzentfarbe (überall verwendbar als %accent%)
+color: "#E31749"
+
 messages:
-  prefix: "<gradient:#00E5FF:#7B68EE>[Crystals]</gradient> "
-  balance: "<gray>Du hast <color:#E31749>%amount%</color> <gray>Crystals."
-  balance-other: "<gray>%player% hat <color:#E31749>%amount%</color> <gray>Crystals."
-  pay-success: "<green>Du hast <color:#E31749>%amount%</color> <green>an <yellow>%target%</yellow> <green>gesendet."
-  pay-received: "<green>Du hast <color:#E31749>%amount%</color> <green>von <yellow>%sender%</yellow> <green>erhalten."
+  prefix: "<gradient:#E31749:#FF5C7F>[Crystals]</gradient> "
+  balance: "<gray>Du hast <color:#E31749>%amount% %symbol%</color> <gray>Crystals."
+  balance-other: "<gray>%player% hat <color:#E31749>%amount% %symbol%</color> <gray>Crystals."
+  pay-success: "<green>Du hast <color:#E31749>%amount% %symbol%</color> <green>an <yellow>%target%</yellow> <green>gesendet."
+  pay-received: "<green>Du hast <color:#E31749>%amount% %symbol%</color> <green>von <yellow>%sender%</yellow> <green>erhalten."
   pay-insufficient: "<red>Du hast nicht genug Crystals."
   pay-self: "<red>Du kannst dir nicht selbst Crystals senden."
   player-not-found: "<red>Spieler nicht gefunden."
@@ -28,20 +31,62 @@ messages:
   balance-removed: "<color:#E31749>%amount%</color> <gray>Crystals von <yellow>%player%</yellow> entfernt."
 
 shop:
-  title: "<gradient:#E31749:#7B68EE>Crystal Shop</gradient>"
+  title: "<gradient:#E31749:#FF5C7F>Crystal Shop</gradient>"
   rows: 6
   filler:
     material: GRAY_STAINED_GLASS_PANE
     name: " "
 
   item-format:
-    name: "<aqua>%name%"
+    name: "<color:#E31749>%name%</color>"
     lore:
-      - "<gray>Preis: <color:#E31749>%price%</color>"
+      - "<gray>Preis: <color:#E31749>%price% %symbol%</color>"
       - "<gray>Klicke zum Kaufen!"
     lore-cant-afford:
-      - "<gray>Preis: <red>%price%</red>"
+      - "<gray>Preis: <red>%price% %symbol%</red>"
       - "<red>Nicht genug Crystals!"
+
+  # ============================================
+  # Kaufbestätigung
+  # ============================================
+  confirmation:
+    enabled: true
+    title: "<gradient:#E31749:#FF5C7F>Kauf bestätigen</gradient>"
+
+    # Vorschau-Item (in der Mitte)
+    preview:
+      name: "<color:#E31749>%name%</color>"
+      lore:
+        - "<gray>Menge: <white>%amount%</white>"
+        - "<gray>Preis: <color:#E31749>%price% %symbol%</color>"
+        - ""
+        - "<gray>Möchtest du diesen Kauf tätigen?"
+
+    # Bestätigen-Button
+    confirm:
+      material: LIME_CONCRETE
+      slot: 11
+      name: "<green>✔ Kauf bestätigen"
+      lore:
+        - "<gray>Klicke, um den Kauf abzuschließen."
+
+    # Abbrechen-Button
+    cancel:
+      material: RED_CONCRETE
+      slot: 15
+      name: "<red>✘ Abbrechen"
+      lore:
+        - "<gray>Klicke, um den Kauf abzubrechen."
+
+    # Filler für den Rest
+    filler:
+      material: BLACK_STAINED_GLASS_PANE
+      name: " "
+
+    messages:
+      success: "<green>Du hast <color:#E31749>%item%</color> für <color:#E31749>%price% %symbol%</color> gekauft!"
+      cancelled: "<red>Kauf abgebrochen."
+      not-enough: "<red>Du hast nicht genug Crystals!"
 
   items:
     diamond:
@@ -49,7 +94,7 @@ shop:
       material: DIAMOND
       amount: 1
       price: 100.0
-      display-name: "<aqua>Diamant"
+      display-name: "<color:#E31749>Diamant</color>"
       lore:
         - "<gray>Ein seltener Diamant."
       commands: []
@@ -59,7 +104,7 @@ shop:
       material: GOLDEN_APPLE
       amount: 1
       price: 50.0
-      display-name: "<gold>Goldener Apfel"
+      display-name: "<color:#E31749>Goldener Apfel</color>"
       lore:
         - "<gray>Heilt und gibt Regeneration."
       commands: []
@@ -69,7 +114,7 @@ shop:
       material: NETHERITE_SCRAP
       amount: 1
       price: 250.0
-      display-name: "<dark_purple>Netherite Schrott"
+      display-name: "<color:#E31749>Netherite Schrott</color>"
       commands: []
 
     spawner_command:
@@ -77,7 +122,7 @@ shop:
       material: SPAWNER
       amount: 1
       price: 5000.0
-      display-name: "<red>Spawner"
+      display-name: "<color:#E31749>Spawner</color>"
       lore:
         - "<gray>Ein Spawner deiner Wahl."
       commands:
@@ -88,43 +133,16 @@ shop:
       material: FEATHER
       amount: 1
       price: 1000.0
-      display-name: "<yellow>Fly für 1 Stunde"
+      display-name: "<color:#E31749>Fly für 1 Stunde</color>"
       lore:
         - "<gray>Erlaubt Fliegen für 60 Minuten."
       commands:
         - "fly %player% 60m"
 
-        # ============================================
+# ============================================
 # PlaceholderAPI - MiniMessage Formatierung
 # ============================================
-# Alle Werte hier unterstützen MiniMessage-Tags:
-#   <red>, <gradient:#ff0000:#00ff00>, <bold>, <hover:show_text:'...'>, <click:...>
-#
-# Verfügbare Platzhalter im Format-String:
-#   %amount%   -> formatierte Zahl (mit short-format aus currency.short-format)
-#   %raw%      -> rohe Zahl (ohne Formatierung)
-#   %symbol%   -> Währungssymbol
-#   %currency% -> Währungsname (Singular)
-#   %plural%   -> Währungsname (Plural)
-#   %unit%     -> Einheit (K/M/B/T oder leer)
-#   %player%   -> Spielername
-#
-# PlaceholderAPI-Placeholder:
-#   %fancycrystal_balance%             -> Rohe Zahl (z.B. 1500.0)
-#   %fancycrystal_balance_short%       -> Kurzformat (z.B. 1.5K)
-#   %fancycrystal_balance_full%        -> Voller Wert (z.B. 1.500,00)
-#   %fancycrystal_balance_formatted%   -> Zahl + Symbol (z.B. 1.5K ✦)
-#   %fancycrystal_balance_custom%      -> Aus placeholders.balance-format (MiniMessage)
-#   %fancycrystal_balance_custom2%     -> Aus placeholders.balance-format-2 (MiniMessage)
-#   %fancycrystal_symbol%              -> Nur das Symbol
-#   %fancycrystal_currency%            -> Währungsname
-#   %fancycrystal_currency_plural%     -> Währungsname Plural
-#   %fancycrystal_unit%                -> Einheit (K/M/B/T)
-#   %fancycrystal_shop_items%          -> Anzahl Shop-Items
 
 placeholders:
-  # Format für %fancycrystal_balance_custom%
-  balance-format: "<gray>[<gradient:#00E5FF:#7B68EE>%amount% %symbol%</gradient>]</gray>"
-
-  # Format für %fancycrystal_balance_custom2%
-  balance-format-2: "<gradient:#00E5FF:#7B68EE>%amount%</gradient> <gray>%symbol%</gray>"
+  balance-format: "<gray>[<gradient:#E31749:#FF5C7F>%amount% %symbol%</gradient>]</gray>"
+  balance-format-2: "<gradient:#E31749:#FF5C7F>%amount%</gradient> <gray>%symbol%</gray>"
