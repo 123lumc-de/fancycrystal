@@ -50,9 +50,10 @@ public class RemoveCrystalsCommand implements CommandExecutor {
             return true;
         }
 
-        double balance = plugin.getEconomy().getBalance(target);
+        double balance = plugin.getStorage().getBalance(target.getUniqueId());
         double toRemove = Math.min(balance, amount);
-        plugin.getEconomy().withdrawPlayer(target, toRemove);
+        plugin.getStorage().addBalance(target.getUniqueId(), -toRemove);
+        plugin.getStorage().saveAsync();
 
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
         String msg = plugin.getConfig().getString("messages.balance-removed", "")
