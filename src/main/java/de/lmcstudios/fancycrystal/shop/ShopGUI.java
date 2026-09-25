@@ -46,7 +46,7 @@ public class ShopGUI {
             }
         }
 
-        double balance = plugin.getEconomy().getBalance(player);
+        double balance = plugin.getStorage().getBalance(player.getUniqueId());
 
         for (ShopItem item : plugin.getShopConfig().getAllItems()) {
             inv.setItem(item.getSlot(), buildItem(item, balance));
