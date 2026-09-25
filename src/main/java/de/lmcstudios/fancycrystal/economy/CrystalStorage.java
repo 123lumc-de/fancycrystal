@@ -59,6 +59,22 @@ public class CrystalStorage {
         cache.put(uuid, amount);
     }
 
+    /**
+     * Addiert (oder subtrahiert bei negativem Delta) einen Betrag auf das Konto.
+     * Negative Ergebnisse werden auf 0 begrenzt.
+     */
+    public void addBalance(UUID uuid, double delta) {
+        double current = getBalance(uuid);
+        cache.put(uuid, Math.max(0, current + delta));
+    }
+
+    /**
+     * Prüft, ob der Spieler mindestens den angegebenen Betrag hat.
+     */
+    public boolean has(UUID uuid, double amount) {
+        return getBalance(uuid) >= amount;
+    }
+
     public void saveAsync() {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, this::save);
     }
