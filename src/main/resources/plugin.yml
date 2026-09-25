@@ -3,10 +3,8 @@ version: '${project.version}'
 main: de.lmcstudios.fancycrystal.FancyCrystalPlugin
 api-version: '1.21'
 authors: [LMC Studios]
-description: Custom Crystal currency for Vault with a configurable shop
+description: Custom Crystal currency with a configurable shop
 website: https://github.com/LMC-Studios/FancyCrystal
-depend: [Vault]
-softdepend: [PlaceholderAPI]
 
 commands:
   crystals:
