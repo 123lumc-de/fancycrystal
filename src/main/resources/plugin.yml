@@ -5,6 +5,7 @@ api-version: '1.21'
 authors: [LMC Studios]
 description: Custom Crystal currency with a configurable shop
 website: https://github.com/LMC-Studios/FancyCrystal
+softdepend: [PlaceholderAPI]
 
 commands:
   crystals:
