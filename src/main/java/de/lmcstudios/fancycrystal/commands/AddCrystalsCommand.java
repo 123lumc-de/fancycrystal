@@ -50,7 +50,8 @@ public class AddCrystalsCommand implements CommandExecutor {
             return true;
         }
 
-        plugin.getEconomy().depositPlayer(target, amount);
+        plugin.getStorage().addBalance(target.getUniqueId(), amount);
+        plugin.getStorage().saveAsync();
 
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
         String msg = plugin.getConfig().getString("messages.balance-added", "")
