@@ -29,7 +29,7 @@ public class CrystalsCommand implements CommandExecutor {
             return true;
         }
 
-        double bal = plugin.getEconomy().getBalance(player);
+        double bal = plugin.getStorage().getBalance(player.getUniqueId());
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
         String msg = plugin.getConfig().getString("messages.balance", "")
             .replace("%amount%", NumberFormatter.formatNumber(bal))
