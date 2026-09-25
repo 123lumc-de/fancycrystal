@@ -32,7 +32,7 @@ public class ShopListener implements Listener {
         ShopItem item = plugin.getShopConfig().getItemAtSlot(event.getRawSlot());
         if (item == null) return;
 
-        double balance = plugin.getEconomy().getBalance(player);
+        double balance = plugin.getStorage().getBalance(player.getUniqueId());
         if (balance < item.getPrice()) {
             player.sendMessage(MM.deserialize(
                 plugin.getConfig().getString("messages.prefix", "") +
@@ -40,7 +40,9 @@ public class ShopListener implements Listener {
             return;
         }
 
-        plugin.getEconomy().withdrawPlayer(player, item.getPrice());
+        plugin.getStorage().addBalance(player.getUniqueId(), -item.getPrice());
+        plugin.getStorage().saveAsync();
+
         player.sendMessage(MM.deserialize(
             plugin.getConfig().getString("messages.prefix", "") +
             "<green>Du hast <aqua>" + item.getId() + "</aqua> für <aqua>" +
