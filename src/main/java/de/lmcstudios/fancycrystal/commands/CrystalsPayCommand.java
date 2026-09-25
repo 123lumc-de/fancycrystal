@@ -54,14 +54,15 @@ public class CrystalsPayCommand implements CommandExecutor {
             return true;
         }
 
-        if (plugin.getEconomy().getBalance(player) < amount) {
+        if (!plugin.getStorage().has(player.getUniqueId(), amount)) {
             player.sendMessage(MM.deserialize(prefix +
                 plugin.getConfig().getString("messages.pay-insufficient", "<red>Nicht genug Crystals.")));
             return true;
         }
 
-        plugin.getEconomy().withdrawPlayer(player, amount);
-        plugin.getEconomy().depositPlayer(target, amount);
+        plugin.getStorage().addBalance(player.getUniqueId(), -amount);
+        plugin.getStorage().addBalance(target.getUniqueId(), amount);
+        plugin.getStorage().saveAsync();
 
         String symbol = plugin.getConfig().getString("currency.symbol", "✦");
         String amt = NumberFormatter.formatNumber(amount);
